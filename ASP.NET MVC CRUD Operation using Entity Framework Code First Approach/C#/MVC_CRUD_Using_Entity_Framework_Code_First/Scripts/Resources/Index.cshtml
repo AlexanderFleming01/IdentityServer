@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<html>
+<body >
+    <div style="position:fixed;left:20%; bottom:58%;">
+        <center style="font-size:70px;">
+            <font color="white">Identity Server 4 Management Portal</font><br>
+            <centre style="font-size:30px"><font color="white">Manage Your Clients effectively</font></centre>
+        </center>
+    </div>
+   
+    <div>
+        <form asp-controller="Client" asp-action="Start" method="post">
+            <button type="submit" class="btn btn-primary btn-lg active" style="position: fixed; left: 35%; right: 55%; bottom: 30% ;width:200px; height:50px; background: #8e44ad ;border: 1px solid #8e44ad ;color: #ffffff ; ">Clients</button>
+          </form>
+        <form asp-controller="Resources" asp-action="Start" method="post">
+            <button type="submit" class="btn btn-primary btn-lg active" style="position: fixed; left: 55%; right: 40%; bottom: 30%;width:200px; height:50px; background: #8e44ad ;border: 1px solid #8e44ad ;color: #ffffff ; ">Resources</button>
+
+        </form>
+    </div>
+</body>
+</html>

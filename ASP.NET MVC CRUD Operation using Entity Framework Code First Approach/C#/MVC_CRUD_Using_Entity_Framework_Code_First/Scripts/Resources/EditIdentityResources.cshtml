@@ -1,0 +1,95 @@
+﻿@using IdentityServer4.EntityFramework.Entities
+@{
+    var identity = ViewData["IdentityResources"] as IdentityResource;
+   
+}
+<script>
+    function Select(checkbox)
+    {
+       if(checkbox.checked)
+        {
+            var result1 = document.getElementById(id).value;
+        }
+            return result1;
+
+    }
+
+
+</script>
+<h1 style="padding-left:150px; padding-right:150px;">Resources Profile Page</h1>
+<form asp-controller="Resources" asp-action="EditIdentityResources" method="post" name="form" onsubmit=" FormValidation();"  style="padding-left:150px; padding-right:150px;">
+
+    <form class="form-horizontal input-form" sstyle="top: 50%;
+    left: 50%;
+    margin-top: -100px;
+    margin-left: -200px" ;>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label for="Name">Resource Name</label>
+                <input type="text" class="form-control" id="ResourceName" name="Name" value="@identity.Name">
+                <span id="ErrorResourceName"></span>
+            </div>
+                  <div class="form-group col-md-6">
+                    <label for="Description">Description</label>
+                    <input type="text" class="form-control" id="Description" name="Description" value="@identity.Description">
+                </div>
+            </div>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label for="DisplayName">DisplayName</label>
+                <input type="text" class="form-control" id="DisplayName" name="DisplayName" value="@identity.DisplayName">
+            </div>
+       
+        <div class="form-group col-md-6">
+            <label for="Type"> Type</label>
+            @foreach (var type in identity.UserClaims)
+            {
+            <input type="text" class="form-control" id="Type" name="Type" value="@type.Type">
+            }
+                <span id="ErrorResourceType"></span>
+        </div>
+        </div>
+        <div class="row">
+           
+            <div class="form-group col-md-6">
+                <label for="Expiration">Expiration</label>
+                <input type="datetime" class="form-control" id="Resourcestatus" name="Expiration">
+            </div>
+        </div>
+      
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="Enabled" class="checkbox-inline">
+                        <input type="checkbox" value="true" name="Enabled" onclick="javascript:Select(this.form.Enabled)">
+                        <div id="checkboxvalue"></div>
+                        Enabled
+                    </label>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="Emphasize" class="checkbox-inline">
+                            <input type="checkbox" value="true" name="Emphasize" onclick="javascript:Select(this.form.Emphasize)">
+                            <div id="checkboxval"></div>
+                            Emphasize
+                        </label>
+                    </div>
+                </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="Required" class="checkbox-inline">
+                        <input type="checkbox" value="true" name="Required" onclick="javascript:Select(this.form.Required)">
+                        <div id="checkboxstatus"></div>
+                        Required
+                    </label>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="ShowInDiscoveryDocument" class="checkbox-inline">
+                            <input type="checkbox" value="true" name="ShowInDiscoveryDocument" onclick="javascript:Select(this.form.ShowInDiscoveryDocument)">
+                            <div id="checkboxresult"></div>
+                            Show In Discovery Document
+                        </label>
+                    </div>
+                </div>
+            <button type="submit" class="btn btn-primary btn-lg active">Save</button>
+      
+    </form>
+</form>

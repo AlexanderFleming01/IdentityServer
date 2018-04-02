@@ -1,0 +1,91 @@
+﻿@model Bushel.Idserver.Management.Models.IdentityResourceDTO
+<script>
+
+    let index = 1
+    function addInput(id) {
+
+        let element = document.createElement("input");
+        element.name = "UserClaims[" + index + "].Type";
+        element.classList.add("form-control");
+        let row = document.getElementById("UserClaim");
+        row.appendChild(element);
+        index++;
+    }
+</script>
+
+<script>
+    function DeleteInput(id) {
+
+        if (document.getElementById(id)) {
+            var child = document.getElementById(id);
+
+            document.getElementById(id).lastChild.remove(this.id);
+
+        }
+    }
+</script>
+
+
+<h1 style="padding-left:150px; padding-right:150px;">Resources Profile Page</h1>
+<form asp-controller="Resources" asp-action="AddIdentity" method="post" name="form" onsubmit=" FormValidation();" style="padding-left:150px; padding-right:150px;">
+
+
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-6">
+            <label asp-for="Description" class="control-label"></label>
+            <input asp-for="Description" class="form-control" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label asp-for="DisplayName" class="control-label"></label>
+            <input asp-for="DisplayName" class="form-control" />
+            <span asp-validation-for="DisplayName" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-6" id="UserClaim">
+
+            <label asp-for="UserClaims" class="control-label"></label>
+            <input asp-for="UserClaims[0].Type" class="form-control">
+            <span asp-validation-for="UserClaims[0].Type" class="text-danger"></span>
+
+        </div>
+        <div id="dynamicInput" style="padding:10px">
+            <input type="button" class="btn btn-primary btn-sm active" value="Add UserClaim" onClick="addInput('UserClaim');">
+            <input type="button" class="btn btn-primary btn-sm active" value="Delete " onClick="DeleteInput('UserClaim');">
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label asp-for="Enabled" class="checkbox-inline" >
+                <input type="checkbox" asp-for="Enabled" />Enabled
+            </label>
+        </div>
+        <div class="form-group col-md-6">
+            <label asp-for="Emphasize" class="checkbox-inline">
+                <input type="checkbox" asp-for="Emphasize" />Emphasize
+            </label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label asp-for="Required" class="checkbox-inline" style="padding:20px">
+                <input type="checkbox" asp-for="Required" />Required
+            </label>
+        </div>
+        <div class="form-group col-md-6">
+            <label asp-for="ShowInDiscoveryDocument" class="checkbox-inline" style="padding:20px">
+                <input type="checkbox" asp-for="ShowInDiscoveryDocument" />ShowInDiscoveryDocument
+            </label>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary btn-lg active">Save</button>
+</form>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
